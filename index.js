@@ -173,8 +173,9 @@ function omsett(tekst){
     tekst = tekst.replace(/[aeiouyæøå]\:/gi, (match) => match.slice(0, -1)); //fjern kolon bak lang vokal
     tekst = tekst.replace(/([aeiouyæøå])(.)\:/gi, (match, p1, p2) => p1 + p2 + p2); //dobbelkonsonant
     tekst = tekst.replace(/([aeiouyæøå])\1+/gi, "$1");
-    tekst = tekst.replace(/([aeiouyæøå]{1,2})[´`]/gi, (match, p1) => "<i>" + p1 + "</i>"); //kursivtrykk. Funkar for diftongar òg
-    tekst = tekst.replace(/[-\[\]\:⫽|ːˈʼ'ˌ]/g, ""); //fjern teikn vi ikkje vil ha
+    tekst = tekst.replace(/([aeiouyæøå]{1,2})[´`]/gi, (match, p1) => "<i>" + p1 + "</i>"); //NAOB-kursivtrykk. Funkar for diftongar òg
+    tekst = tekst.replace(/ˈ([^aeiouyæøå]*)([aeiouyæøå]{1,2})/gi, (match, konsonantar, vokalar) => konsonantar + "<i>" + vokalar + "</i>"); //IPA-kursivtrykk, diftongar inkludert
+    tekst = tekst.replace(/[-\[\]\:⫽|ːˈʼ'ˌ.]/g, ""); //fjern teikn vi ikkje vil ha
     return tekst;
 }
 
